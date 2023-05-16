@@ -66,7 +66,7 @@ def predict_leaf(image):
     pred_label = class_labels[pred_index]
     confidence_score = prediction[0][pred_index]
 
-    return pred_label, confidence_score
+    return pred_label, confidence_score, pred_index, class_labels, prediction
 
 
 uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
@@ -76,7 +76,9 @@ if uploaded_file is not None:
 
     # Call the predict_leaf function
     pred_label, confidence_score = predict_leaf(uploaded_file)
-
+    st.write(f"prediction: {prediction}")
+    st.write(f"class_labels: {class_labels}")
+    st.write(f"pred_index: {pred_index}")
     st.write(f"The leaf is: {pred_label}")
     st.write(f"Confidence score: {confidence_score:.2f}")
 
