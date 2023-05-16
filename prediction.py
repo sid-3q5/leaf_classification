@@ -75,7 +75,7 @@ if uploaded_file is not None:
     st.image(img, caption="Uploaded Image", use_column_width=True)
 
     # Call the predict_leaf function
-    pred_label, confidence_score = predict_leaf(uploaded_file)
+    pred_label, confidence_score, pred_index, class_labels, prediction = predict_leaf(uploaded_file)
     st.write(f"prediction: {prediction}")
     st.write(f"class_labels: {class_labels}")
     st.write(f"pred_index: {pred_index}")
