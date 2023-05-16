@@ -50,55 +50,33 @@ if __name__ == '__main__':
 model = keras.models.load_model('model.h5')
 
 
-def preprocess_image(image):
-    # Open the uploaded image using PIL
+def predict_leaf(image):
     img = Image.open(image)
-
-    # Resize the image to the desired size
     img = img.resize((256, 256))
-
-    # Convert the image to a NumPy array
     img_array = np.array(img)
-
-    # Normalize the pixel values
     img_array = img_array / 255.0
-    # Add a batch dimension
     img_array = np.expand_dims(img_array, axis=0)
 
-    return img_array
+    # Predict the class probabilities
+    prediction = model.predict(img_array)
+    class_labels = ['neem', 'tulsi']
+
+    # Get the predicted class index
+    pred_index = np.argmax(prediction, axis=1)[0]
+    pred_label = class_labels[pred_index]
+    confidence_score = prediction[0][pred_index]
+
+    return pred_label, confidence_score
 
 
-# Load the pre-trained model
-# model = keras.models.load_model('Model.h5')
-
-# Create a file uploader for the user to upload an image
-uploaded_file = st.file_uploader(
-    "Choose an image", type=["jpg", "jpeg", "png"])
-
-
+uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
-
-    # to print image
     img = Image.open(uploaded_file)
     st.image(img, caption="Uploaded Image", use_column_width=True)
 
-    # Preprocess the uploaded image
-    img = preprocess_image(uploaded_file)
+    # Call the predict_leaf function
+    pred_label, confidence_score = predict_leaf(uploaded_file)
 
-    # Make a prediction using the pre-trained model
-    prediction = model.predict(img)
+    st.write(f"The leaf is: {pred_label}")
+    st.write(f"Confidence score: {confidence_score:.2f}")
 
-    class_labels = ['neem', 'tulsi']
-
-    pred = np.argmax(prediction, axis=-1)
-
-    # Display the prediction result
-    st.write(f"The leaf is: {class_labels[pred[0]]}")
-
-    # Extract the class label and confidence score for the top predicted class
-    class_index = np.argmax(prediction[0])
-    # class_label = 'class_labels'  # Replace with the actual class name corresponding to class_index
-    confidence_score = prediction[0][class_index]
-    # st.write(f"The predicted fish species is: {class_labels[pred[0]]}")
-    st.write(
-        f'Top predicted class: {class_labels[pred[0]]} (confidence: {confidence_score:.2f})')
