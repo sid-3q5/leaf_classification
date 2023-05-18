@@ -47,7 +47,7 @@ if __name__ == '__main__':
 
 
 # Load the pre-trained model
-model = keras.models.load_model('model.h5')
+model = keras.models.load_model('leaf_classification_model.h5')
 
 
 def predict_leaf(image):
