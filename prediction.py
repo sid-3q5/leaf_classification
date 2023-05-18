@@ -34,8 +34,12 @@ def make_prediction(image):
     predictions = model.predict(img_array)
     # Get the predicted class index
     predicted_class_index = np.argmax(predictions[0])
+    
+#   predicted_class = 'neem' if predictions[0][0] < 0.5 else 'tulsi'
+#   confidence = round(100 * np.max(predictions[0]), 2)
     # Get the predicted class label
     predicted_class = class_labels[predicted_class_index]
+    predicted_class = 'neem' if predictions[0][0] < 0.5 else 'tulsi'
     # Get the confidence score
     confidence = round(100 * np.max(predictions[0]), 2)
     return predicted_class, confidence, predictions, predicted_class_index
