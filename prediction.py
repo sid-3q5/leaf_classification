@@ -38,7 +38,7 @@ def make_prediction(image):
     predicted_class = class_labels[predicted_class_index]
     # Get the confidence score
     confidence = round(100 * np.max(predictions[0]), 2)
-    return predicted_class, confidence
+    return predicted_class, confidence, predictions, predicted_class_index
 
 # Streamlit app
 def main():
@@ -61,6 +61,8 @@ def main():
             # Display the predicted class and confidence score
             st.write("Predicted Class:", predicted_class)
             st.write("Confidence:", confidence, "%")
+            st.write("predictions:", predictions)
+            st.write("predicted_class_index:", predicted_class_index)
 
 # Run the app
 if __name__ == '__main__':
