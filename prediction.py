@@ -1,84 +1,75 @@
 import streamlit as st
-from tensorflow import keras
 from PIL import Image
 import numpy as np
-
-import matplotlib.pyplot as plt
 import tensorflow as tf
-
-import streamlit as st
+from tensorflow.keras.models import load_model
+from tensorflow import keras
+import matplotlib.pyplot as plt
 from streamlit_option_menu import option_menu
 
 
-st.set_page_config(
-    page_title='Medicinal Leaf Identification', layout='centered')
+# Load the trained model
+model = load_model("/path/to/your/model.h5")
 
+# Set the class labels
+class_labels = ['neem', 'tulsi']
 
+# Function to preprocess the image
+def preprocess_image(image):
+    # Resize the image to the required input shape of the model
+    image = image.resize((256, 256))
+    # Convert image to numpy array
+    img_array = np.array(image)
+    # Normalize pixel values
+    img_array = img_array / 255.0
+    # Expand dimensions to match the input shape of the model
+    img_array = np.expand_dims(img_array, axis=0)
+    return img_array
+
+# Function to make predictions
+def make_prediction(image):
+    # Preprocess the image
+    img_array = preprocess_image(image)
+    # Make the prediction
+    predictions = model.predict(img_array)
+    # Get the predicted class index
+    predicted_class_index = np.argmax(predictions[0])
+    # Get the predicted class label
+    predicted_class = class_labels[predicted_class_index]
+    # Get the confidence score
+    confidence = round(100 * np.max(predictions[0]), 2)
+    return predicted_class, confidence
+
+# Streamlit app
 def main():
-    st.sidebar.title('Leaf Identify')
-    menu = ['Home', 'About Us']
-    choice = st.sidebar.selectbox('Menu', menu)
+    # Set app title
+    st.title("Leaf Classification")
 
-    if choice == 'Home':
-        st.header('Home')
-        # Add content for Home page here
-    elif choice == 'About Us':
-        st.header('About Us')
-        st.write('Our project is focused on the automatic identification of fish species. This technology has the potential to greatly benefit humans in a number of ways.')
-        st.write('For example, it can help with conservation efforts by allowing for more accurate tracking of fish populations. It can also aid in the fishing industry by allowing for more efficient and sustainable fishing practices.')
-        # Add content for About Us page here
+    # File uploader
+    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
 
-# Set background color to white
-    page_bg_color = '''
-    <style>
-    body {
-    background-color: white;
-    }
-    </style>
-    '''
-    st.markdown(page_bg_color, unsafe_allow_html=True)
+    if uploaded_file is not None:
+        # Read the image file
+        image = Image.open(uploaded_file)
+        # Display the uploaded image
+        st.image(image, caption="Uploaded Image", use_column_width=True)
 
+        # Make predictions when the user clicks the "Predict" button
+        if st.button("Predict"):
+            # Make the prediction
+            predicted_class, confidence = make_prediction(image)
+            # Display the predicted class and confidence score
+            st.write("Predicted Class:", predicted_class)
+            st.write("Confidence:", confidence, "%")
 
+# Run the app
 if __name__ == '__main__':
     main()
 
 
-# <------------------------------------------***************************************---------------------------------------------->
 
 
-# Load the pre-trained model
-model = keras.models.load_model('leaf_classification_model.h5')
 
 
-def predict_leaf(image):
-    img = Image.open(image)
-    img = img.resize((256, 256))
-    img_array = np.array(img)
-    img_array = img_array / 255.0
-    img_array = np.expand_dims(img_array, axis=0)
 
-    # Predict the class probabilities
-    prediction = model.predict(img_array)
-    class_labels = ['neem', 'tulsi']
-
-    # Get the predicted class index
-    pred_index = np.argmax(prediction, axis=1)[0]
-    pred_label = class_labels[pred_index]
-    confidence_score = prediction[0][pred_index]
-
-    return pred_label, confidence_score, pred_index, class_labels, prediction
-
-
-uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-if uploaded_file is not None:
-    img = Image.open(uploaded_file)
-    st.image(img, caption="Uploaded Image", use_column_width=True)
-
-    # Call the predict_leaf function
-    pred_label, confidence_score, pred_index, class_labels, prediction = predict_leaf(uploaded_file)
-    st.write(f"prediction: {prediction}")
-    st.write(f"class_labels: {class_labels}")
-    st.write(f"pred_index: {pred_index}")
-    st.write(f"The leaf is: {pred_label}")
-    st.write(f"Confidence score: {confidence_score:.2f}")
 
