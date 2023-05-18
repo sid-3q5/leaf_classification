@@ -9,7 +9,7 @@ from streamlit_option_menu import option_menu
 
 
 # Load the trained model
-model = load_model("/path/to/your/model.h5")
+model = load_model("leaf_classification_model.h5")
 
 # Set the class labels
 class_labels = ['neem', 'tulsi']
