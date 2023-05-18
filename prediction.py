@@ -57,7 +57,7 @@ def main():
         # Make predictions when the user clicks the "Predict" button
         if st.button("Predict"):
             # Make the prediction
-            predicted_class, confidence = make_prediction(image)
+            predicted_class, confidence, predictions, predicted_class_index = make_prediction(image)
             # Display the predicted class and confidence score
             st.write("Predicted Class:", predicted_class)
             st.write("Confidence:", confidence, "%")
