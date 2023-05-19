@@ -48,6 +48,8 @@ def make_prediction(image):
 def main():
     # Set app title
     st.title("Leaf Classification")
+    st.write("Classification of Medicinal Leaves - Currently the system can only classify Neem and Tulsi.")
+    
 
     # File uploader
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
@@ -67,6 +69,9 @@ def main():
             st.write("Confidence:", confidence, "%")
             st.write("predictions:", predictions)
             st.write("predicted_class_index:", predicted_class_index)
+            
+     st.sidebar.markdown("---")
+     st.sidebar.write("This is a footer.")
 
 # Run the app
 if __name__ == '__main__':
