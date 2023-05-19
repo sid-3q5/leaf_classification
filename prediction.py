@@ -42,7 +42,8 @@ def make_prediction(image):
     predicted_class = 'neem' if predictions[0][0] < 0.5 else 'tulsi'
     # Get the confidence score
     confidence = round(100 * np.max(predictions[0]), 2)
-    return predicted_class, confidence, predictions, predicted_class_index
+#     return predicted_class, confidence, predictions, predicted_class_index
+    return predicted_class, confidence
 
 # Streamlit app
 def main():
@@ -63,12 +64,19 @@ def main():
         # Make predictions when the user clicks the "Predict" button
         if st.button("Predict"):
             # Make the prediction
-            predicted_class, confidence, predictions, predicted_class_index = make_prediction(image)
-            # Display the predicted class and confidence score
-            st.write("Predicted Class:", predicted_class)
-            st.write("Confidence:", confidence, "%")
-            st.write("predictions:", predictions)
-            st.write("predicted_class_index:", predicted_class_index)
+#             predicted_class, confidence, predictions, predicted_class_index = make_prediction(image)
+#             # Display the predicted class and confidence score
+#             st.write("Predicted Class:", predicted_class)
+#             st.write("Confidence:", confidence, "%")
+#             st.write("predictions:", predictions)
+#             st.write("predicted_class_index:", predicted_class_index)
+            predicted_class, predictions = make_prediction(image)
+            # Display the predicted class and confidence scores
+            st.subheader("Prediction")
+            st.write("Class:", predicted_class)
+            for i, class_label in enumerate(class_labels):
+                confidence = round(predictions[i] * 100, 2)
+                st.write(f"{class_label.capitalize()}: {confidence}%")
      
      
 
