@@ -74,7 +74,6 @@ def main():
 
 # Run the app
 if __name__ == '__main__':
-    st.beta_set_page_config(theme='dark')
     main()
 
 
