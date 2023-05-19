@@ -49,6 +49,9 @@ def main():
     # Set app title
     st.title("Leaf Classification")
     st.write("Classification of Medicinal Leaves - Currently the system can only classify Neem and Tulsi.")
+    st.sidebar.markdown("---")
+    st.sidebar.write("This is a footer.")
+    
     
 
     # File uploader
@@ -69,9 +72,8 @@ def main():
             st.write("Confidence:", confidence, "%")
             st.write("predictions:", predictions)
             st.write("predicted_class_index:", predicted_class_index)
-            
-     st.sidebar.markdown("---")
-     st.sidebar.write("This is a footer.")
+     
+     
 
 # Run the app
 if __name__ == '__main__':
