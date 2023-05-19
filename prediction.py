@@ -49,9 +49,6 @@ def main():
     # Set app title
     st.title("Leaf Classification")
     st.write("Classification of Medicinal Leaves - Currently the system can only classify Neem and Tulsi.")
-    st.sidebar.markdown("---")
-    st.sidebar.write("This is a footer.")
-    
     
 
     # File uploader
@@ -77,6 +74,7 @@ def main():
 
 # Run the app
 if __name__ == '__main__':
+    st.beta_set_page_config(theme='dark')
     main()
 
 
