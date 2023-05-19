@@ -55,7 +55,7 @@ def main():
         """
         <style>
         body {
-            background-color: #f2f2f2; /* Replace with your desired background color */
+            background-color: #4F4F4F; /* Replace with your desired background color */
         }
         </style>
         """,
