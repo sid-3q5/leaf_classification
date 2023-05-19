@@ -51,6 +51,17 @@ def main():
     st.title("Leaf Classification")
     st.write("Classification of Medicinal Leaves - Currently the system can only classify Neem and Tulsi.")
     
+    st.markdown(
+        """
+        <style>
+        body {
+            background-color: #f2f2f2; /* Replace with your desired background color */
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+    
 
     # File uploader
     uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
