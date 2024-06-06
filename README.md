@@ -4,24 +4,25 @@ This project involves designing and implementing an Artificial Intelligence and 
 
 ## Table of Contents
 - [Introduction](#introduction)
-- [Project Structure](#project-structure)
-- [Installation](#installation)
 - [Dataset](#dataset)
-- [Model Architecture](#model-architecture)
-- [Training the Model](#training-the-model)
-- [Evaluation](#evaluation)
-- [Usage](#usage)
-- [Results](#results)
-- [Contributing](#contributing)
-- [License](#license)
+- [Results](#result)
 
 ## Introduction
-Identifying medicinal plants accurately is crucial for various applications, including pharmacology and botany. This project leverages a Convolutional Neural Network (CNN) to classify medicinal plants based on leaf images, achieving high accuracy and demonstrating the potential of AIML in botanical studies.
 
-## Project Structure
+Identifying medicinal plants accurately is crucial for various applications, including pharmacology and botany. This project leverages a Convolutional Neural Network (CNN) to classify medicinal plants based on leaf images, achieving high accuracy and demonstrating the potential of AIML in botanical studies. For the project, we only used Neem and Tulsi to train our model. 
 
+## Dataset
 
-  
+The dataset consists of images of leaves from various medicinal plants. It is structured into species of leaves. The image dataset is distributed in training, testing and evaluation such that 80% for training, 10% for testing and 10% for evalution. Below link is the dataset used :-
 
+[https://www.kaggle.com/datasets/aryashah2k/indian-medicinal-leaves-dataset/discussion?sort=undefined](https://www.kaggle.com/datasets/aryashah2k/indian-medicinal-leaves-dataset/discussion?sort=undefined)
+
+[https://www.kaggle.com/datasets/warcoder/indian-medicinal-plant-image-dataset](https://www.kaggle.com/datasets/sharvan123/medicinal-plant)
+
+## Results
+
+The model achieved an accuracy of over 85% on the test dataset, indicating its effectiveness in identifying medicinal plant species based on their leaves.
+
+![Medicinal Plants](images/medicinal_plants.jpg)
 
 
