@@ -23,6 +23,8 @@ The dataset consists of images of leaves from various medicinal plants. It is st
 
 The model achieved an accuracy of over 85% on the test dataset, indicating its effectiveness in identifying medicinal plant species based on their leaves.
 
+Link to project:- https://sid-3q5-new-plant-prediction-q1vuyc.streamlit.app/
+
 ![Medicinal Plants](medicinal_ss.png)
 
 
